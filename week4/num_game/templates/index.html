@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Great Number Game!</h1>
+        <p>I am thinking of a number between 1 and 100</p>
+        {% if 'guess' in session %}
+            {% if session['guess'] > session['number'] %}
+            <!-- Too high -->
+            <div class="message bg-danger">
+                <h3>The number is less than {{session['guess']}}</h3>
+            </div>
+            {% elif session['guess'] < session['number'] %}
+            <!--  Too Low-->
+            <div class="message bg-danger">
+                <h3>The number is greater than {{session['guess']}}</h3>
+            </div>
+            {% else %}
+            <!-- Correct -->
+            <div class="message bg-success">
+                <h3>Congratulations! You got it right!</h3>
+                <a href="/clear"><button class="btn btn-success">Try Again</button></a>
+            </div>
+            {% endif %}
+        
+        {% endif %}
+        {% if session['count'] < 5 or session['guess'] == session['number'] %}
+            <form action="/process_guess" method="POST">
+                <div class=form-group>
+                    <label for='guess'>
+                    Guess a number: 
+                    </label>
+                    <input id='guess' name='guess' type='text'>
+                    <button>Guess!</button>
+                </div>
+            </form>
+        {% else %}
+            <div class="lose bg-danger">
+                <h1>YOU LOSE!</h1>
+                <a href="/clear"><button class="btn btn-danger">Try again</button></a>
+            </div>
+        {% endif %}
+
+        
+        <h3>You have used {{session['count']}} guesses!</h3>
+    </div>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
+</body>
+</html>
