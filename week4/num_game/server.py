@@ -22,7 +22,7 @@ def process_guess():
 @app.route("/clear")
 def clear():
     session.clear()
-    return redirect("/")
+    return "You are on the Clear route"
 
 # ACTIVATE SERVER
 if __name__ == "__main__":
