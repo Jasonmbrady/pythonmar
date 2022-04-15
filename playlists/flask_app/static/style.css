@@ -1,0 +1,14 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: center;
+}
+
+.log-reg-form {
+    text-align: right;
+    margin-right: 25px;
+}
